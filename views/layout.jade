@@ -1,0 +1,19 @@
+!!! 5
+html(lang="en")
+  head
+    title Conway's Game of Life
+    each stylesheet in stylesheets
+        link(
+            href="#{stylesheet.href}"
+            type="#{stylesheet.type}"
+            media="#{stylesheet.media}"
+            rel="#{stylesheet.rel}"
+        )
+    each script in scripts
+        script(
+            type="#{script.type}"
+            src="#{script.src}"
+        )
+  body
+    h1 Conway's Game of Life
+    !{body}

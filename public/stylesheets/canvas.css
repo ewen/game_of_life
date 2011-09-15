@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+.board {
+    border:1px solid #888;
+    height:400px;
+    width:400px;
+}
+
+.board canvas {
+    height:100%;
+    width:100%;
+}

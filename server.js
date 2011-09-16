@@ -6,10 +6,13 @@ var scripts = require('./modules/scripts.js');
 var app = express.createServer();
 
 // add global stylesheets
+stylesheets.add({href: 'stylesheets/main.css'});
 stylesheets.add({href: 'stylesheets/board.css'});
+stylesheets.add({href: 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/smoothness/jquery-ui.css'});
 
 // add global scripts
 scripts.add({src: 'http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js'});
+scripts.add({src: 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js'});
 scripts.add({src: 'scripts/board.js'});
 
 app.configure(function(){

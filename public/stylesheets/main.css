@@ -1,0 +1,55 @@
+html {
+    font-family:Verdana,sans-serif;
+    color:#333;
+}
+
+h1 {
+    font-weight:normal;
+}
+
+h1 span {
+    color:#5A85FF;
+}
+
+.container {
+    width:800px;
+    margin:auto;
+}
+
+.buttons {
+    font-size:.6em;
+    margin-bottom:5px;
+}
+
+.buttons_left {
+    display:inline-block;
+    width:200px;
+}
+
+.buttons_middle {
+    display:inline-block;
+    width:400px;
+    vertical-align:top;
+}
+
+.buttons_right {
+    display:inline-block;
+    width:200px;
+    text-align:right;
+}
+
+.buttons_middle p {
+    margin:0 0 2px 0;
+}
+
+.slow {
+    display:inline-block;
+    width:50%;
+
+}
+
+.fast {
+    display:inline-block;
+    width:50%;
+    text-align:right;
+}

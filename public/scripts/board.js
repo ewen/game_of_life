@@ -1,6 +1,8 @@
 GOL = {};
 
 GOL.board = function (spec) {
+    var that = {};
+
     // private vars
     var h = spec.height;
     var w = spec.width;
@@ -10,13 +12,15 @@ GOL.board = function (spec) {
     var ctx = spec.context;
     var cw = w / dx; // single cell width
     var ch = h / dy; // single cell height
+    var running = false;
+    var speed = 250;
 
     // private functions
     var draw = function () {
         var padding = 1;
         for (var x = 0; x < dx; x += 1) {
             for (var y = 0; y < dy; y += 1) {
-                ctx.fillStyle = (grid[x][y]) ? 'rgb(0, 0, 255)' : 'rgb(230, 230, 230)';
+                ctx.fillStyle = (grid[x][y]) ? 'rgb(90, 133, 255)' : 'rgb(230, 230, 230)';
                 ctx.fillRect(
                     x * cw + padding,
                     y * ch + padding,
@@ -53,8 +57,12 @@ GOL.board = function (spec) {
         });
         return n;
     };
-
-    var that = {};
+    var run = function () {
+        if (running) {
+            that.step();
+            setTimeout(run, speed);
+        }
+    };
     
     // public functions
     that.clear = function () {
@@ -94,7 +102,7 @@ GOL.board = function (spec) {
         for (var x = 0; x < dx; x += 1) {
             grid[x] = [];
             for (var y = 0; y < dy; y += 1) {
-                if (Math.random() >= .75) {
+                if (Math.random() >= 0.75) {
                     grid[x][y] = true;
                 } else {
                     grid[x][y] = false;
@@ -102,6 +110,22 @@ GOL.board = function (spec) {
             }
         }
         draw();
+    };
+    that.run = function () {
+        running = true;
+        run();
+    };
+    that.stop = function () {
+        running = false;
+    };
+    that.isRunning = function () {
+        return running;
+    };
+    that.setSpeed = function (ms) {
+        speed = ms;
+    };
+    that.getSpeed = function () {
+        return speed;
     };
     
     // init grid
@@ -119,9 +143,14 @@ $(function () {
         context: ctx,
         width: width,
         height: height,
-        dimensions: [25, 25]
+        dimensions: [100, 75]
     });
-    var t;
+    var speed = 500;
+    var tid;
+    var running = false;
+    var step = function () {
+        
+    };
     e.click(function (event) {
         board.toggle([event.offsetX, event.offsetY]);
         return false;
@@ -136,9 +165,24 @@ $(function () {
         board.randomize();
     });
     $('#run').click(function () {
-        t = setInterval(board.step, 250);
+        if (!board.isRunning()) {
+            board.run();
+            $(this).find('span').text('Pause');
+            $('#step').button('option', 'disabled', true);
+        } else {
+            board.stop();
+            $(this).find('span').text('Run');
+            $('#step').button('option', 'disabled', false);
+        }
     });
-    $('#stop').click(function () {
-        clearTimeout(t);
-    });
+    $('.buttons button').button();
+    $('#slider').slider({
+		value: 1500 - board.getSpeed(),
+		min: 0,
+		max: 1500,
+		step: 50,
+		slide: function(event, ui) {
+			board.setSpeed(1500 - ui.value);
+		}
+	});
 });

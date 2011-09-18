@@ -4,6 +4,7 @@ var stylesheets = require('./modules/stylesheets.js');
 var scripts = require('./modules/scripts.js');
 
 var app = express.createServer();
+var port;
 
 // add global stylesheets
 stylesheets.add({href: 'stylesheets/main.css'});
@@ -24,8 +25,16 @@ app.configure(function(){
     app.use(express['static'](__dirname + '/public'));
 });
 
+app.configure('development', function(){
+    port = process.env.C9_PORT;
+});
+
+app.configure('production', function(){
+    port = 80;
+});
+
 app.get('/', function(req, res){
     res.render('index', {});
 });
 
-app.listen(process.env.C9_PORT);
+app.listen(port);

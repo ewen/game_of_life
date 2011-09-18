@@ -1,6 +1,6 @@
 {
   "name": "game_of_life",
-  "version": "0.0.1"
+  "version": "0.0.1",
   "dependencies": {
     "express": "2.4",
     "jade": "0.15"

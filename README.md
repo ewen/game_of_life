@@ -9,3 +9,5 @@ It is written in node.js with the Expressjs framework and uses HTML5 canvas to d
 Server Requirements - node.js modules 'express' and 'jade'.
 
 Browser Requirements - a modern browser, tested on Chrome 13.
+
+Browse to http://blooming-mist-4344.herokuapp.com/ to see it running.

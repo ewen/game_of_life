@@ -1,4 +1,4 @@
-GOL = {};
+var GOL = {};
 
 GOL.board = function (spec) {
     var that = {};
@@ -75,8 +75,8 @@ GOL.board = function (spec) {
         draw();
     };
     that.toggle = function (offset) {
-        x = Math.floor(offset[0] / cw);
-        y = Math.floor(offset[1] / cw);
+        var x = Math.floor(offset[0] / cw);
+        var y = Math.floor(offset[1] / cw);
         grid[x][y] = !grid[x][y];
         // @todo just redraw the single cell rather than the whole grid
         draw();
@@ -145,12 +145,6 @@ $(function () {
         height: height,
         dimensions: [100, 75]
     });
-    var speed = 500;
-    var tid;
-    var running = false;
-    var step = function () {
-        
-    };
     e.click(function (event) {
         board.toggle([event.offsetX, event.offsetY]);
         return false;
